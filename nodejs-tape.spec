@@ -9,7 +9,7 @@
 
 Name:		%{?scl_prefix}nodejs-tape
 Version:	4.0.3
-Release:	3%{?dist}
+Release:	5%{?dist}
 Summary:	Tap-producing test harness for node and browsers
 Url:		https://github.com/substack/tape
 Source0:	https://registry.npmjs.org/%{npm_name}/-/%{npm_name}-%{version}.tgz
@@ -37,7 +37,6 @@ Tap-producing test harness for node and browsers
 %nodejs_fixdep defined 1.0.0
 %nodejs_fixdep deep-equal
 %nodejs_fixdep resumer
-%nodejs_fixdep glob '<5.0'
 
 %build
 #nothing to do
@@ -66,6 +65,9 @@ tap test/*.js
 %doc readme.markdown LICENSE
 
 %changelog
+* Mon Dec 07 2015 Tomas Hrcka <thrcka@redhat.com> - 4.0.3-5
+- Remove fixdep macro for dependency on glob package
+
 * Tue Sep 22 2015 Zuzana Svetlikova <zsvetlik@redhat.com> - 4.0.3-3
 - Add missing files to %%install
 
