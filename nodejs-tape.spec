@@ -9,7 +9,7 @@
 
 Name:		%{?scl_prefix}nodejs-tape
 Version:	4.0.3
-Release:	5%{?dist}
+Release:	7%{?dist}
 Summary:	Tap-producing test harness for node and browsers
 Url:		https://github.com/substack/tape
 Source0:	https://registry.npmjs.org/%{npm_name}/-/%{npm_name}-%{version}.tgz
@@ -49,7 +49,7 @@ cp -pr bin/ lib/ package.json *.js \
 
 #rm -f %{buildroot}%{_bindir}/tape
 mkdir -p %{buildroot}%{_bindir}/tape
-ln -sf %{_libdir}/node_modules/%{npm_name}/./bin/tape %{buildroot}%{_bindir}/tape
+ln -sf %{nodejs_sitelib}/%{npm_name}/bin/tape %{buildroot}%{_bindir}/tape
 %{nodejs_symlink_deps}
 
 %if 0%{?enable_tests}
@@ -60,11 +60,14 @@ tap test/*.js
 
 %files
 %{nodejs_sitelib}/tape
-%{_bindir}/*
+%{_bindir}/tape
 
 %doc readme.markdown LICENSE
 
 %changelog
+* Thu Feb 11 2016 Tomas Hrcka <thrcka@redhat.com> - 4.0.3-7
+- Fix simlink to bindir to point to file not directory
+
 * Mon Dec 07 2015 Tomas Hrcka <thrcka@redhat.com> - 4.0.3-5
 - Remove fixdep macro for dependency on glob package
 
